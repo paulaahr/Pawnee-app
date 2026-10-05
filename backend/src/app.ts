@@ -6,6 +6,7 @@
  */
 
 import express, { Express, Request, Response } from "express";
+import cors from "cors";
 import { requestId } from "./middlewares/requestId";
 import { logger } from "./middlewares/logger";
 import { errorHandler } from "./middlewares/errorHandler";
@@ -13,9 +14,10 @@ import { criaturasRouter } from "./routes/criaturas.routes";
 import { avistamientosRouter } from "./routes/avistamientos.routes";
 import { ApiError } from "./apiError";
 
+
 export function crearApp(): Express {
   const app = express();
-
+  app.use(cors());
   app.use(express.json());
   app.use(requestId);
   app.use(logger);
