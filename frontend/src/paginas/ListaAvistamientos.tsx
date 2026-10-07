@@ -1,10 +1,3 @@
-/**
- * paginas/ListaAvistamientos.tsx
- * -----------------------------------
- * Lista TODOS los avistamientos. Como el backend usa populate("criatura"),
- * cada avistamiento.criatura ya es el objeto completo.
- */
-
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { eliminarAvistamiento, obtenerAvistamientos } from "../api/avistamientosApi";
@@ -24,64 +17,52 @@ export function ListaAvistamientos() {
       .finally(() => setCargando(false));
   }
 
-  useEffect(() => {
-    cargar();
-  }, []);
+  useEffect(() => { cargar(); }, []);
 
   async function manejarEliminar(id: string) {
     if (!window.confirm("¿Eliminar este avistamiento?")) return;
-    try {
-      await eliminarAvistamiento(id);
-      cargar();
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "No se pudo eliminar el avistamiento.");
-    }
+    try { await eliminarAvistamiento(id); cargar(); }
+    catch (err) { setError(err instanceof Error ? err.message : "No se pudo eliminar el avistamiento."); }
   }
 
   return (
-    <div>
-      <h1>Avistamientos registrados</h1>
+    <main className="page">
+      <section className="hero">
+        <div>
+          <p className="eyebrow">Registro de campo</p>
+          <h1>Avistamientos</h1>
+          <p className="lead">Reportes documentados por testigos sobre encuentros y ubicaciones de criaturas.</p>
+        </div>
+        <div className="actions">
+          <Link className="btn btn-secondary" to="/">Volver a criaturas</Link>
+          <Link className="btn btn-primary" to="/avistamientos/nuevo">+ Nuevo avistamiento</Link>
+        </div>
+      </section>
 
-      <p>
-        <Link to="/">Volver a criaturas</Link>
-        {" · "}
-        <Link to="/avistamientos/nuevo">Registrar avistamiento nuevo</Link>
-      </p>
+      <section className="panel">
+        {cargando && <div className="state-box">Cargando avistamientos...</div>}
+        {!cargando && error && <div className="state-box">Error: {error}</div>}
+        {!cargando && !error && avistamientos.length === 0 && <div className="state-box">Todavía no hay avistamientos registrados.</div>}
 
-      {cargando && <p>Cargando avistamientos...</p>}
-      {!cargando && error && <p>Error: {error}</p>}
-      {!cargando && !error && avistamientos.length === 0 && <p>Todavía no hay avistamientos registrados.</p>}
-
-      {!cargando && !error && avistamientos.length > 0 && (
-        <table border={1} cellPadding={6}>
-          <thead>
-            <tr>
-              <th>Fecha</th>
-              <th>Criatura</th>
-              <th>Testigo</th>
-              <th>Ubicación</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {avistamientos.map((avistamiento) => (
-              <tr key={avistamiento._id}>
-                <td>{avistamiento.fecha.slice(0, 10)}</td>
-                <td>
-                  <Link to={`/criaturas/${avistamiento.criatura._id}`}>{avistamiento.criatura.nombre}</Link>
-                </td>
-                <td>{avistamiento.testigo}</td>
-                <td>{avistamiento.ubicacion}</td>
-                <td>
-                  <button type="button" onClick={() => manejarEliminar(avistamiento._id)}>
-                    Eliminar
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
-    </div>
+        {!cargando && !error && avistamientos.length > 0 && (
+          <div className="table-wrap">
+            <table>
+              <thead><tr><th>Fecha</th><th>Criatura</th><th>Testigo</th><th>Ubicación</th><th>Acciones</th></tr></thead>
+              <tbody>
+                {avistamientos.map((a) => (
+                  <tr key={a._id}>
+                    <td>{a.fecha.slice(0, 10)}</td>
+                    <td><Link className="name-link" to={`/criaturas/${a.criatura._id}`}>{a.criatura.nombre}</Link></td>
+                    <td>{a.testigo}</td>
+                    <td>{a.ubicacion}</td>
+                    <td><button className="btn btn-danger" type="button" onClick={() => manejarEliminar(a._id)}>Eliminar</button></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </section>
+    </main>
   );
 }
