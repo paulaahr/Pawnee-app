@@ -31,7 +31,7 @@ export function ListaCriaturas() {
       <section className="home-hero">
         <div className="hero-copy">
           <p className="eyebrow">PAWNEE CREATURE DEPARTMENT</p>
-          <h1>Rare finds.<br />Good field notes.</h1>
+          <h1>Rare finds.Good field notes.</h1>
           <span className="squiggle" aria-hidden="true">〰〰</span>
           <p className="lead">Archivo oficial de criaturas registradas, su nivel de peligro y estado actual de investigación.</p>
           <div className="actions hero-actions">
@@ -45,7 +45,7 @@ export function ListaCriaturas() {
           <div className="specimen-card specimen-back"><span>FIELD</span><strong>07</strong></div>
           <div className="specimen-card specimen-front">
             <div className="specimen-eye">✦</div>
-            <span>PAWNEE</span>
+            <span>Criaturas</span>
             <strong>UNKNOWN<br />SPECIMEN</strong>
             <small>HANDLE WITH CURIOSITY</small>
           </div>
@@ -63,7 +63,6 @@ export function ListaCriaturas() {
       <section className="page collection-section">
         <div className="collection-intro">
           <p className="eyebrow">OUR COLLECTION</p>
-          <h2>Strange<br />but documented.</h2>
           <span className="mini-squiggle">〰</span>
           <p>Clasifica, consulta y mantén al día cada expediente sin perderte entre reportes.</p>
           <Link className="underlined-link" to="/criaturas/nueva">NUEVO EXPEDIENTE</Link>

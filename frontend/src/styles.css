@@ -1,7 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,700;9..144,800;9..144,900&display=swap');
 
 :root {
-  font-family: 'DM Sans', system-ui, sans-serif;
+  font-family: 'DM Sans', sans-serif;
   color: #2e3219;
   background: #f7eadb;
   font-synthesis: none;
