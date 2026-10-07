@@ -11,14 +11,19 @@ export default function App() {
       <div className="app-shell">
         <header className="topbar">
           <div className="topbar-inner">
-            <Link className="brand" to="/">
-              <span className="brand-mark">P</span>
-              <span>Pawnee Archive</span>
+            <nav className="nav nav-left" aria-label="Navegación principal">
+              <Link className="nav-link" to="/">ARCHIVO</Link>
+              <Link className="nav-link" to="/avistamientos">AVISTAMIENTOS</Link>
+            </nav>
+
+            <Link className="brand" to="/" aria-label="Pawnee Archive - Inicio">
+              <span className="brand-title">PAWNEE</span>
+              <span className="brand-subtitle">— CREATURE ARCHIVE —</span>
             </Link>
-            <nav className="nav" aria-label="Navegación principal">
-              <Link className="nav-link" to="/">Criaturas</Link>
-              <Link className="nav-link" to="/avistamientos">Avistamientos</Link>
-              <Link className="nav-link" to="/criaturas/nueva">+ Nueva criatura</Link>
+
+            <nav className="nav nav-right" aria-label="Acciones rápidas">
+              <Link className="nav-link" to="/criaturas/nueva">NUEVA CRIATURA</Link>
+              <span className="nav-dot" aria-hidden="true" />
             </nav>
           </div>
         </header>
@@ -31,6 +36,21 @@ export default function App() {
           <Route path="/avistamientos" element={<ListaAvistamientos />} />
           <Route path="/avistamientos/nuevo" element={<FormularioAvistamiento />} />
         </Routes>
+
+        <footer className="site-footer">
+          <div className="footer-inner">
+            <div>
+              <span className="footer-kicker">PAWNEE FIELD NOTES</span>
+              <p>Un archivo pequeño para fenómenos bastante grandes.</p>
+            </div>
+            <div className="footer-stamp" aria-hidden="true">P</div>
+            <div className="footer-links">
+              <Link to="/">Criaturas</Link>
+              <Link to="/avistamientos">Reportes</Link>
+              <Link to="/criaturas/nueva">Registrar</Link>
+            </div>
+          </div>
+        </footer>
       </div>
     </BrowserRouter>
   );
